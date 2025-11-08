@@ -1,0 +1,28 @@
+persistentVolumeClaim:
+  enabled: true
+  storageClass: local-path
+  existingClaim: pihole
+
+adminPassword: 'sbiFe72ArfGu43e4RqEM'
+DNS1: "1.1.1.1"
+DNS2: "8.8.8.8"
+serviceWeb:
+  type: LoadBalancer
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+serviceDns:
+  type: LoadBalancer
+  mixedService: false
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+ingress:
+  enabled: true
+  hosts:
+  - pihole.nkaewam.local
+  tls:
+  - hosts:
+    - pihole.nkaewam.local
+    secretName: pihole-tls
+
+extraEnvVars:
+  TZ: Asia/Bangkok

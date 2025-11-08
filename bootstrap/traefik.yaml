@@ -1,0 +1,12 @@
+additionalArguments:
+      - "--api"
+      - "--api.dashboard=true"
+      - "--api.insecure=true"
+      - "--log.level=DEBUG"
+ingressRoute:
+  dashboard:
+    enabled: true
+ports:
+  traefik:
+    expose:
+      default: true
