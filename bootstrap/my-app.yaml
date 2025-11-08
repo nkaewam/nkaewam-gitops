@@ -38,16 +38,10 @@ kind: Ingress
 metadata:
   name: myapp-ingress
   namespace: sandbox
-  annotations:
-    cert-manager.io/cluster-issuer: selfsigned-issuer
 spec:
-  ingressClassName: traefik
-  tls:
-  - hosts:
-    - myapp.nkaewam.local
-    secretName: myapp-tls
+  ingressClassName: cloudflare-tunnel
   rules:
-  - host: myapp.nkaewam.local
+  - host: myapp.nkaewam.dev
     http:
       paths:
       - path: /
