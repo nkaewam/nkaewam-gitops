@@ -78,7 +78,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: homelab-ca-issuer
 spec:
-  ingressClassName: traefik
   entryPoints:
     - postgres
   routes:
