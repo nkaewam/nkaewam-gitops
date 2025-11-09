@@ -58,6 +58,8 @@ ingress:
   # className: ""
   extraLabels:
     {}
+  
+  ingressClassName: traefik
 
   annotations:
     cert-manager.io/cluster-issuer: homelab-ca-issuer
