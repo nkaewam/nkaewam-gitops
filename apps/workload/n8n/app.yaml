@@ -6,12 +6,12 @@ metadata:
 spec:
   replicas: 1
   selector:
-  matchLabels:
-  app: n8n
+    matchLabels:
+      app: n8n
   template:
-  metadata:
-  labels:
-    app: n8n
+    metadata:
+      labels:
+        app: n8n
     spec:
       containers:
         - name: n8n
