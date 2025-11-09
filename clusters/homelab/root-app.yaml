@@ -20,27 +20,36 @@ spec:
       selfHeal: true
 ---
 # The root app manages all other ArgoCD Applications
-# yaml-language-server: $schema=https://raw.githubusercontent.com/KevinNitroG/argocd-json-schema/refs/heads/main/schemas/stable/standalone/v1alpha1application.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/KevinNitroG/argocd-json-schema/refs/heads/main/schemas/stable/standalone/v1alpha1applicationset.json
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
   name: workloads
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/nkaewam/homelab-gitops.git
-    path: apps/workload
-    targetRevision: main
-    directory:
-      recurse: true
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  generators:
+    - git:
+        repoURL: https://github.com/nkaewam/homelab-gitops.git
+        revision: main
+        directories:
+          - path: apps/workload/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/nkaewam/homelab-gitops.git
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/KevinNitroG/argocd-json-schema/refs/heads/main/schemas/stable/standalone/v1alpha1application.json
 apiVersion: argoproj.io/v1alpha1
