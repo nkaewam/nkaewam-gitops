@@ -24,13 +24,13 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: projects
+  name: workloads
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/nkaewam/homelab-gitops.git
-    path: apps/argocd-projects
+    path: apps/workload
     targetRevision: main
     directory:
       recurse: true
