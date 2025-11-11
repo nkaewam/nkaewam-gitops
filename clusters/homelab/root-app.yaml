@@ -57,6 +57,7 @@ metadata:
   name: system-apps
   namespace: argocd
 spec:
+  project: default
   source:
     repoURL: https://github.com/nkaewam/homelab-gitops.git
     path: apps/system
