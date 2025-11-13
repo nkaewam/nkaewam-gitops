@@ -8,13 +8,18 @@ metadata:
 spec:
   project: default
   source:
-    chart: uptime-kuma
-    repoURL: https://helm.irsigler.cloud
-    targetRevision: 2.22.0
+    sources:
+      - repoURL: https://helm.irsigler.cloud
+        chart: uptime-kuma
+        targetRevision: 2.22.0
+        helm:
+          releaseName: uptime-kuma
+      - repoURL: https://github.com/nkaewam/homelab-gitops.git
+        targetRevision: main
+        ref: values
     helm:
-      releaseName: uptime-kuma
       valueFiles:
-        - apps/system/uptime-kuma/values.yaml
+        - $values/apps/system/uptime-kuma/values.yaml
 
   destination:
     server: "https://kubernetes.default.svc"

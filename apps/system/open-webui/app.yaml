@@ -8,13 +8,18 @@ metadata:
 spec:
   project: default
   source:
-    chart: open-webui
-    repoURL: https://helm.openwebui.com/
-    targetRevision: 8.14.0
+    sources:
+      - repoURL: https://helm.openwebui.com/
+        chart: open-webui
+        targetRevision: 8.14.0
+        helm:
+          releaseName: open-webui
+      - repoURL: https://github.com/nkaewam/homelab-gitops.git
+        targetRevision: main
+        ref: values
     helm:
-      releaseName: open-webui
       valueFiles:
-        - apps/system/open-webui/values.yaml
+        - $values/apps/system/open-webui/values.yaml
 
   destination:
     server: "https://kubernetes.default.svc"
