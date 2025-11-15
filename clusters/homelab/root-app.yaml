@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/nkaewam/homelab-gitops.git   # <-- change to your repo URL
+    repoURL: https://github.com/nkaewam/nkaewam-gitops.git   # <-- change to your repo URL
     path: clusters/homelab
     targetRevision: main
   destination:
@@ -29,7 +29,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/nkaewam/homelab-gitops.git
+        repoURL: https://github.com/nkaewam/nkaewam-gitops.git
         revision: main
         directories:
           - path: apps/workload/*
@@ -40,7 +40,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/nkaewam/homelab-gitops.git
+        repoURL: https://github.com/nkaewam/nkaewam-gitops.git
         targetRevision: main
         path: '{{path}}'
       destination:
@@ -59,24 +59,23 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/nkaewam/homelab-gitops.git
+        repoURL: https://github.com/nkaewam/nkaewam-gitops.git
         revision: main
         directories:
           - path: apps/system/*
   template:
     metadata:
       name: '{{path.basename}}'
-      namespace: argocd
     spec:
       project: default
       source:
-        repoURL: https://github.com/nkaewam/homelab-gitops.git
+        repoURL: https://github.com/nkaewam/nkaewam-gitops.git
         targetRevision: main
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: argocd
+        namespace: '{{path.basename}}'
       syncPolicy:
         automated:
-          prune: true
           selfHeal: true
+          prune: true

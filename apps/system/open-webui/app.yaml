@@ -14,12 +14,11 @@ spec:
         targetRevision: 8.14.0
         helm:
           releaseName: open-webui
-      - repoURL: https://github.com/nkaewam/homelab-gitops.git
+          valueFiles:
+            - $values/apps/system/open-webui/templates/values.yaml
+      - repoURL: https://github.com/nkaewam/nkaewam-gitops.git
         targetRevision: main
         ref: values
-    helm:
-      valueFiles:
-        - $values/apps/system/open-webui/templates/values.yaml
 
   destination:
     server: "https://kubernetes.default.svc"
